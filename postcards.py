@@ -1,3 +1,5 @@
+INSTAGRAM_USER = "test"
+INSTAGRAM_PASSWORD = "test"
 POSTCARDS = {
     "C1145_1": {"image": "C1145_1.jpg", "audio": "city.mp3", "class": "city"} ,
     "C18_1": {"image": "C18_1.jpg", "audio": "city.mp3", "class": "city"} ,

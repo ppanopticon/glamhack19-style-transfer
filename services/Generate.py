@@ -10,10 +10,13 @@ from flask import request
 
 from model import Model
 
+from InstagramAPI import InstagramAPI
 
+from postcards import INSTAGRAM_USER, INSTAGRAM_PASSWORD
 
 LOWER_BLUE = np.array([0, 0, 100])
 UPPER_BLUE = np.array([120, 100, 255])
+
 
 class Generate(Resource):
     def post(self, postcard_id):
@@ -24,7 +27,6 @@ class Generate(Resource):
             style = cv2.imread(os.path.join('postcards', 'images', postcard_id + '.jpg'), cv2.IMREAD_COLOR)
             image = cv2.imdecode(data, cv2.IMREAD_COLOR)
             image = image[0:min(image.shape[0], style.shape[0]), 0:min(image.shape[1], style.shape[1])]
-
 
             if style is not None and image is not None:
                 # Generate filename and read file.
@@ -41,21 +43,21 @@ class Generate(Resource):
             return {'status': 0}
 
 
-
 #
 # Separate Thread for performing the style transfer.
 #
 class StyleTransferThread(threading.Thread):
 
-    def __init__(self, input, style, output):
+    def __init__(self, input, style, output, post=0):
         super(StyleTransferThread, self).__init__()
         self.input = input
         self.style = style
         self.output = output
+        self.post = post
 
     # Run method (executed in parallel)
     def run(self):
-        #Instantiate model for style transfer
+        # Instantiate model for style transfer
         model = Model(self.input, self.style)
 
         # Create mask for blue screen replacement.
@@ -72,4 +74,10 @@ class StyleTransferThread(threading.Thread):
         background_image[mask == 0] = [0, 0, 0]
 
         # Export combined image.
-        cv2.imwrite(os.path.join('snapshots', self.output + '.jpg'), background_image + masked_image)
+        path = os.path.join('snapshots', self.output + '.jpg')
+        cv2.imwrite(path, background_image + masked_image)
+
+        if self.post == 1:
+            api = InstagramAPI(INSTAGRAM_USER, INSTAGRAM_PASSWORD)
+            api.login()
+            api.uploadPhoto(path, "TimeGazer @ GLAM mix'n'hack 2019 #timegazer #glamhack2019")
