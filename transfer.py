@@ -1,5 +1,3 @@
-import numpy as np
-import requests
 import argparse
 import cv2
 
@@ -22,7 +20,6 @@ def main():
     model = Model(input_image, style_image)
     output = model.run()
 
-    cv2.imshow("image", output)
     cv2.imwrite(args['output'], output)
 
 if __name__ == "__main__":

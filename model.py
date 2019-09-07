@@ -3,7 +3,7 @@ import cv2
 
 from keras import backend, Sequential
 from keras.applications.vgg16 import VGG16
-from keras.layers import MaxPooling2D, AveragePooling2D, Conv2D
+from keras.layers import MaxPooling2D, AveragePooling2D
 from scipy.optimize import fmin_l_bfgs_b
 
 
@@ -15,7 +15,7 @@ IMAGENET_MEAN_RGB_VALUES = [123.68, 116.779, 103.939]
 
 TOTAL_VARIATION_WEIGHT = 0.995
 TOTAL_VARIATION_LOSS_FACTOR = 1.25
-ITERATIONS = 5
+ITERATIONS = 10
 
 
 class Model:
@@ -122,8 +122,7 @@ class Model:
         x[:, :, 0] += IMAGENET_MEAN_RGB_VALUES[2]
         x[:, :, 1] += IMAGENET_MEAN_RGB_VALUES[1]
         x[:, :, 2] += IMAGENET_MEAN_RGB_VALUES[0]
-        x = np.clip(x, 0, 255).astype("uint8")
-        return x
+        return np.clip(x, 0, 255).astype("uint8")
 
 class Evaluator:
 
