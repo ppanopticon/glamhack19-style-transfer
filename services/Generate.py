@@ -49,6 +49,24 @@ class StyleTransferThread(threading.Thread):
 
     # Run method (executed in parallel)
     def run(self):
+
+        #Instantiate model for style transfer
         model = Model(self.input, self.style)
-        img = model.run(10)
-        cv2.imwrite(os.path.join('./snapshots/', self.output), img)
+
+        # Create mask for blue screen replacement.
+        lower_blue = np.array([0, 0, 100])
+        upper_blue = np.array([120, 100, 255])
+        mask = cv2.resize(self.input, (model.width, model.height))
+        mask = cv2.inRange(mask, lower_blue, upper_blue)
+
+        # Generate style transfered image and mask it based on blue screen.
+        masked_image = model.run(10)
+        masked_image[mask != 0] = [0, 0, 0]
+
+        # Mask background image.
+        background_image = cv2.resize(self.style, (model.width, model.height))
+        background_image = cv2.cvtColor(background_image, cv2.COLOR_BGR2RGB)
+        background_image[mask == 0] = [0, 0, 0]
+
+        # Export combined image.
+        cv2.imwrite(os.path.join('./snapshots/', self.output), background_image + masked_image)
