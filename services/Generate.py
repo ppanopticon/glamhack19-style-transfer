@@ -20,7 +20,7 @@ UPPER_BLUE = np.array([120, 100, 255])
 
 class Generate(Resource):
     def put(self, postcard_id):
-        self.post(postcard_id)
+        return self.post(postcard_id)
 
     def post(self, postcard_id):
 
@@ -29,10 +29,10 @@ class Generate(Resource):
             data = np.fromstring(request.data, np.uint8)
             style = cv2.imread(os.path.join('postcards', 'images', postcard_id + '.jpg'), cv2.IMREAD_COLOR)
             image = cv2.imdecode(data, cv2.IMREAD_COLOR)
-            image = image[0:min(image.shape[0], style.shape[0]), 0:min(image.shape[1], style.shape[1])]
 
             if style is not None and image is not None:
                 # Generate filename and read file.
+                image = image[0:min(image.shape[0], style.shape[0]), 0:min(image.shape[1], style.shape[1])]
                 filename = str(uuid.uuid4())
 
                 # Invoke model (new thread) and generate stuff (new thread).
