@@ -1,9 +1,12 @@
 import os
+import threading
 import uuid
 
 import cv2
 from flask_restful import Resource
 from flask import request
+
+from model import Model
 
 
 class Generate(Resource):
@@ -18,10 +21,17 @@ class Generate(Resource):
             # Generate filename and read file.
             filename = str(uuid.uuid4()) + '.jpg'
 
-            # TODO: Invoke model (new thread) and generate stuff.
-            # x = threading.Thread(target=thread_function, args=(1,))
-            # x.start()
+            # Invoke model (new thread) and generate stuff (new thread).
+            model = Model(image, style)
+            x = threading.Thread(target=self.run, args=(filename,model))
+            x.start()
 
             return {'status': 1, 'id': filename}
         except Exception:
             return {'status': 0}
+
+
+    # Run
+    def run(self, output, model):
+        img = model.run()
+        cv2.imwrite(output, img)
