@@ -1,8 +1,9 @@
 import numpy as np
 import cv2
 
-from keras import backend
+from keras import backend, Sequential
 from keras.applications.vgg16 import VGG16
+from keras.layers import MaxPooling2D, AveragePooling2D, Conv2D
 from scipy.optimize import fmin_l_bfgs_b
 
 
@@ -52,10 +53,16 @@ class Model:
 
         input_tensor = backend.concatenate([input_image_var, style_image_var, self.combination_image], axis=0)
 
-        # Adjust VGG16 model
-        self.model = VGG16(input_tensor=input_tensor, include_top=False)
+        # Create and adjust VGG16 model
+        vgg = VGG16(input_tensor=input_tensor, weights='imagenet', include_top=False)
+        self.model = Sequential()
+        for layer in vgg.layers:
+            if layer.__class__ == MaxPooling2D:
+                self.model.add(AveragePooling2D())
+            else:
+                self.model.add(layer)
 
-        layers = dict([(layer.name, layer.output) for layer in self.model.layers])
+        layers = dict([(layer.name, layer.get_output_at(0)) for layer in self.model.layers])
 
         content_layer = 'block2_conv2'
         layer_features = layers[content_layer]
