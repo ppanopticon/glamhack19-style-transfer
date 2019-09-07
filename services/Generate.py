@@ -19,6 +19,9 @@ UPPER_BLUE = np.array([120, 100, 255])
 
 
 class Generate(Resource):
+    def put(self, postcard_id):
+        self.post(postcard_id)
+
     def post(self, postcard_id):
 
         # Load images
