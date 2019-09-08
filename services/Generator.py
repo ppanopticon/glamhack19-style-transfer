@@ -50,8 +50,7 @@ class Generator():
                 path = os.path.join('snapshots', item['output'] + '.jpg')
                 cv2.imwrite(path, background_image + masked_image)
 
-
-                #self.api.uploadPhoto(path, "TimeGazer @ GLAM mix'n'hack 2019 #timegazer #glamhack2019")
+                self.api.uploadPhoto(path, "TimeGazer @ GLAM mix'n'hack 2019 #timegazer #glamhack2019")
 
     instance = None
 

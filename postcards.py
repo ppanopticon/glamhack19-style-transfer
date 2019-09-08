@@ -1,10 +1,11 @@
-INSTAGRAM_USER = "test"
-INSTAGRAM_PASSWORD = "test"
+INSTAGRAM_USER = "timegazervalais"
+INSTAGRAM_PASSWORD = "ValaisWallis"
+
 POSTCARDS = {
-    "C1145_1": {"image": "C1145_1.jpg", "audio": "city.mp3", "class": "city"} ,
-    "C18_1": {"image": "C18_1.jpg", "audio": "city.mp3", "class": "city"} ,
-    "C56_1": {"image": "C56_1.jpg", "audio": "city.mp3", "class": "city"} ,
-    "C910_1": {"image": "C910_1.jpg", "audio": "city.mp3", "class": "city"} ,
+    "C1145_1": {"image": "C1145_1.jpg", "audio": "city.mp3", "class": "city"},
+    "C18_1": {"image": "C18_1.jpg", "audio": "city.mp3", "class": "city"},
+    "C56_1": {"image": "C56_1.jpg", "audio": "city.mp3", "class": "city"},
+    "C910_1": {"image": "C910_1.jpg", "audio": "city.mp3", "class": "city"},
     "C919_1": {"image": "C919_1.jpg", "audio": "city.mp3", "class": "city"},
 
     "C5071_1": {"image": "C5071_1.jpg", "audio": "countryside.mp3", "class": "countryside"},
@@ -29,5 +30,8 @@ POSTCARDS = {
     "C1335_1": {"image": "C1335_1.jpg", "audio": "winter.mp3", "class": "winter"},
     "C1839_1": {"image": "C1839_1.jpg", "audio": "winter.mp3", "class": "winter"},
     "C1863_1": {"image": "C1863_1.jpg", "audio": "winter.mp3", "class": "winter"},
-    "C4823_1": {"image": "C4823_1.jpg", "audio": "winter.mp3", "class": "winter"}
+    "C4823_1": {"image": "C4823_1.jpg", "audio": "winter.mp3", "class": "winter"},
+
+    "1234": {"image": "1234.jpg", "audio": "city.mp3", "class": "art"},
+
 }
