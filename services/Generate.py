@@ -1,5 +1,4 @@
 import os
-import threading
 import uuid
 
 import cv2
@@ -8,11 +7,6 @@ import numpy as np
 from flask_restful import Resource
 from flask import request
 
-from model import Model
-
-from InstagramAPI import InstagramAPI
-
-from postcards import INSTAGRAM_USER, INSTAGRAM_PASSWORD
 from services.Generator import Generator
 
 
