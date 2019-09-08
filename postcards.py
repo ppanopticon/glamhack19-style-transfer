@@ -25,6 +25,7 @@ POSTCARDS = {
     "C4586_1": {"image": "C4586_1.jpg", "audio": "vehicles.ogg", "class": "vehicles"},
     "C5180_1": {"image": "C5180_1.jpg", "audio": "vehicles.ogg", "class": "vehicles"},
     "C5233_1": {"image": "C5233_1.jpg", "audio": "vehicles.ogg", "class": "vehicles"},
+    "C5148_1": {"image": "C5148_1.jpg", "audio": "vehicles.ogg", "class": "vehicles"},
 
     "C1334_1": {"image": "C1334_1.jpg", "audio": "winter.ogg", "class": "winter"},
     "C1335_1": {"image": "C1335_1.jpg", "audio": "winter.ogg", "class": "winter"},
