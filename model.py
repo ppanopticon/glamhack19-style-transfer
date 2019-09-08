@@ -54,13 +54,7 @@ class Model:
         input_tensor = backend.concatenate([input_image_var, style_image_var, self.combination_image], axis=0)
 
         # Create and adjust VGG16 model
-        vgg = VGG16(input_tensor=input_tensor, weights='imagenet', include_top=False)
-        self.model = Sequential()
-        for layer in vgg.layers:
-            if layer.__class__ == MaxPooling2D:
-                self.model.add(AveragePooling2D())
-            else:
-                self.model.add(layer)
+        self.model  = VGG16(input_tensor=input_tensor, weights='imagenet', include_top=False)
 
         layers = dict([(layer.name, layer.get_output_at(0)) for layer in self.model.layers])
 
@@ -114,7 +108,7 @@ class Model:
         evaluator = Evaluator(self)
 
         for i in range(iterations):
-            x, loss, info = fmin_l_bfgs_b(evaluator.loss, x.flatten(), fprime=evaluator.gradients, maxfun=20)
+            x, loss, info = fmin_l_bfgs_b(evaluator.loss, x.flatten(), fprime=evaluator.gradients, maxfun=25)
             print("Iteration %d completed with loss %d" % (i, loss))
 
         x = x.reshape((self.height, self.width, self.channels))
