@@ -10,7 +10,7 @@ from model import Model
 from postcards import INSTAGRAM_USER, INSTAGRAM_PASSWORD
 
 LOWER_BLUE = np.array([0, 0, 100])
-UPPER_BLUE = np.array([140, 140, 255])
+UPPER_BLUE = np.array([150, 150, 255])
 
 class Generator():
     class __Generator(threading.Thread):

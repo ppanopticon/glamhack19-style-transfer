@@ -28,11 +28,11 @@ class Generate(Resource):
             # Adjust size of style image
             height, width, channels = style.shape
             factor_width, factor_height = (1.0,1.0)
-            if height > received.shape[0] * 1.75:
+            if height > received.shape[0] * 2.0:
                 factor_width = (received.shape[0]*2 / height)
                 width = int(width * factor_width)
                 height = received.shape[0] * 2
-            elif width > received.shape[1] * 1.75:
+            elif width > received.shape[1] * 2.0:
                 factor_height = (received.shape[1]*2 / width)
                 height = int(height * factor_height)
                 width = received.shape[1] * 2
