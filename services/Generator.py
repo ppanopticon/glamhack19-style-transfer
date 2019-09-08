@@ -17,8 +17,6 @@ class Generator():
         def __init__(self):
             threading.Thread.__init__(self)
             self.queue = SimpleQueue()
-            self.api = InstagramAPI(INSTAGRAM_USER, INSTAGRAM_PASSWORD)
-            self.api.login()
 
         def __str__(self):
             return repr(self) + self.current
@@ -50,7 +48,9 @@ class Generator():
                 path = os.path.join('snapshots', item['output'] + '.jpg')
                 cv2.imwrite(path, background_image + masked_image)
 
-                self.api.uploadPhoto(path, "TimeGazer @ GLAM mix'n'hack 2019 #timegazer #glamhack2019")
+                api = InstagramAPI(INSTAGRAM_USER, INSTAGRAM_PASSWORD)
+                api.login()
+                api.uploadPhoto(path, "TimeGazer @ GLAM mix'n'hack 2019 #timegazer #glamhack2019")
 
     instance = None
 
