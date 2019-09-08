@@ -1,6 +1,6 @@
 import os
 import threading
-from queue import Queue, SimpleQueue
+from queue import Queue
 
 import cv2
 import numpy as np
@@ -16,7 +16,7 @@ class Generator():
     class __Generator(threading.Thread):
         def __init__(self):
             threading.Thread.__init__(self)
-            self.queue = SimpleQueue()
+            self.queue = Queue(250)
 
         def __str__(self):
             return repr(self) + self.current
