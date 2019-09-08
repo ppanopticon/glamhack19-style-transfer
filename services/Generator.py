@@ -38,7 +38,7 @@ class Generator():
                 mask = cv2.inRange(mask, LOWER_BLUE, UPPER_BLUE)
 
                 # Generate style transferred image and mask it based on blue screen.
-                masked_image = model.run(10)
+                masked_image = model.run(3)
                 masked_image[mask != 0] = [0, 0, 0]
 
                 # Mask background image.

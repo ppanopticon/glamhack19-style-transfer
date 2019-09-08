@@ -108,7 +108,7 @@ class Model:
         evaluator = Evaluator(self)
 
         for i in range(iterations):
-            x, loss, info = fmin_l_bfgs_b(evaluator.loss, x.flatten(), fprime=evaluator.gradients, maxfun=25)
+            x, loss, info = fmin_l_bfgs_b(evaluator.loss, x.flatten(), fprime=evaluator.gradients, maxfun=50)
             print("Iteration %d completed with loss %d" % (i, loss))
 
         x = x.reshape((self.height, self.width, self.channels))
