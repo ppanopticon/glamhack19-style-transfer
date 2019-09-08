@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 
+from services.Generator import Generator
 from services.PostcardAudio import PostcardAudio
 from services.PostcardImageInfo import PostcardImageInfo
 from services.PostcardRandom import PostcardRandom
@@ -33,4 +34,11 @@ api.add_resource(Snapshot, '/history/image/<snapshot_id>') # Route_6: Access sna
 api.add_resource(Generate, '/generate/<postcard_id>') # Route_7: Generate a new photo
 
 if __name__ == '__main__':
+     # Run Generator thread.
+     gen = Generator()
+     gen.start()
+
+     # Run Flask
      app.run(port='5002', host='0.0.0.0')
+
+
